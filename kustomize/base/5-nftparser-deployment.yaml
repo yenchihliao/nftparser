@@ -1,0 +1,43 @@
+# bridge-collected
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nftparser
+  namespace: default
+  labels:
+    app: nftparser
+    patches: with-secret-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nftparser
+  template:
+    metadata:
+      labels:
+        app: nftparser
+    spec:
+      serviceAccountName: to-be-replaced
+      nodeSelector:
+        iam.gke.io/gke-metadata-server-enabled: "true"
+      containers:
+        - name: nftparser
+          image: to-be-replaced
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: nftparser-config
+          env:
+            - name: GCP_SECRET_MGR_INFURA_API_KEY
+              value: to-be-replaced
+            - name: GCP_SECRET_MGR_SQL_PRIVATE_KEY
+              value: to-be-replaced
+            - name: GCP_SECRET_MGR_SENDGRID_API_KEY
+              value: to-be-replaced
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "25m"
+            limits:
+              memory: "200Mi"
+              cpu: "50m"

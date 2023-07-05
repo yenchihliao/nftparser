@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    name: nftparser-config
+  name: nftparser-config
+data:
+  PERIOD_IN_HOUR: "0.1"

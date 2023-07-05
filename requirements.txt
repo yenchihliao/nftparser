@@ -1,0 +1,5 @@
+web3==5.31.3
+schedule==1.2.0
+psycopg2-binary==2.9.6
+sendgrid==6.10.0
+google-cloud-secret-manager==2.16.1
